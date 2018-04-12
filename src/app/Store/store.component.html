@@ -1,0 +1,52 @@
+<div class="navbar navbar-inverse bg-inverse">
+
+  <a class="navbar-brand pull-xs-3">
+    <img src="https://im0-tub-ru.yandex.net/i?id=1dddecc4c9f501bd04f2961dfa9affe4&n=11" width="70px" height="50px" class="d-inline-block align-top img-thumbnail" alt="...">
+    <span class="nav-text">MY STORE</span>
+  </a>
+  <cart-summary></cart-summary>
+</div>
+<div class="bg-info p-a-0 p-l-1">
+  <div class="btn-group btn-group-md" role="group" aria-label="Basic example">
+    <button type="button" class="btn btn-secondary" (click)="changeCategory()">Home</button>
+    <button *ngFor="let cat of categories" type="button" class="btn btn-secondary" [class.active]="cat==selectedCategory" (click)="changeCategory(cat)">{{cat}}</button>
+  </div>
+</div>
+<div class="col-xs-12">
+<div *ngFor="let product of products "class="card mb-3 col-md-6 col-xs-12 text-center bg-success card-outline-info m-b-0">
+  <img class="img-fluid img-thumbnail m-t-1" [src] = "product.src" alt="Card image cap">
+  <div class="card-header bg-primary">
+    <h5 class="card-title">{{ product.name }}</h5>
+  </div>
+  <div class="card-body">
+    <p class="card-text bg-inverse p-l-1">{{ product.description }}</p>
+    <span class="pull-xs-right tag tag-danger m-b-1">
+      {{ product.price | currency:"USD":true:"2.2-2" }}
+    </span>
+    <span class="pull-xs-right tag tag-primary m-b-1">
+      {{ product.amount | number:"2.0" }} units in stock
+    </span>
+    <button class="btn btn-info btn-md pull-xs-left m-b-1"
+            (click)="addProductToCart(product)">
+      Add To Cart
+    </button>
+  </div>
+</div>
+  <div class="col-xs-12 bg-info p-a-1 m-b-1">
+    <div class="form-inline pull-xs-left m-r-1">
+      <select class="form-control-lg bg-primary" [value]="productsPerPage"
+              (change)="changePageSize($event.target.value)">
+        <option value="3">3 per Page</option>
+        <option value="4">4 per Page</option>
+        <option value="6">6 per Page</option>
+        <option value="8">8 per Page</option>
+      </select>
+    </div>
+    <div class="btn-group-md pull-xs-right">
+      <button *counter="let page of pageCount" (click)="changePage(page)"
+              class="btn btn-outline-primary" [class.active]="page == selectedPage">
+        {{page}}
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="pull-xs-right">
+  <button *ngIf="cart.itemCount != 0" type="button" class="btn btn-primary disabled">
+   <span>
+    Cart:
+    <span *ngIf="cart.itemCount > 0">
+{{ cart.itemCount }} item(s)
+{{ cart.cartPrice | currency:"USD":true:"2.2-2" }}
+</span>
+   </span>
+  </button>
+
+  <button class="btn btn-md bg-info m-l-1" [disabled]="cart.itemCount == 0" routerLink="/cart">
+    <i class="fa fa-shopping-cart">Proceed to checkout</i>
+  </button>
+</div>
